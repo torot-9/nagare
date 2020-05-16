@@ -3,21 +3,36 @@ print "Content-type:text/html\n\n"
 
 # index.rb 基本###
 
-t_title="経過報告サイト"
+t_title="経過報告サイト (作成中)"
 t_title_sub="栽培"
-
-t_body=<<EOT
-<br>
-EOT
 
 
 t_css=<<EOT
-body {
+body{
    background-color:deepskyblue;
-}
+   }
+.t_l_img{
+   width:200px;
+   margin:20px;
+   }
 EOT
 
 
+img_list=[]
+Dir.glob('./img/*.png') do |w|
+   img_list.push w
+end
+
+top_list=""
+img_list.each do |w|
+   top_list+="<img class='t_l_img' src='#{w}'>"
+end
+
+
+t_body=<<EOT
+#{top_list}
+<br>
+EOT
 
 whtml=DATA.read
 
@@ -34,6 +49,9 @@ __END__
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="経過報告 画像投稿サイトを作りたい">
+<meta name="keywords" content="栽培,成長,投稿サイト,掲示板,コミュニティ">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <title>%title%</title>
 <style>
 %css%
